@@ -1,0 +1,52 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env
+.env.local
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# Logs and local database
+logs/
+*.log
+*.sqlite3
+*.db
+instance/
+*.pid
+
+# Cache and dependency directories
+dist/
+build/
+*.egg-info/
+.eggs/
+.mypy_cache/
+.pytest_cache/
+.coverage
+
+# Docker specific
+*.dockerignore
+docker-compose.override.yml
+
+# FastAPI specific
+local_settings.py
+settings.pyc
+alembic/
+__pycache__/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Pyright
+typings/
