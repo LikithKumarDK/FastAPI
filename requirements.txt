@@ -10,3 +10,4 @@ huggingface_hub
 opencv-python  # cv2 is included in opencv-python
 timm
 multiport
+python-multipart 
