@@ -137,9 +137,9 @@ async def serve_css():
     raise HTTPException(status_code=404, detail="CSS file not found")
 
 
-# Run the Application
-if __name__ == "__main__":
-    import uvicorn
-    print(" Starting FastAPI Server...")
-    port = int(os.getenv("PORT", 10000)) 
-    uvicorn.run(app, host="0.0.0.0", port=port)
+# # Run the Application
+# if __name__ == "__main__":
+#     import uvicorn
+#     print(" Starting FastAPI Server...")
+#     port = int(os.getenv("PORT", 10000)) 
+#     uvicorn.run(app, host="0.0.0.0", port=port)
