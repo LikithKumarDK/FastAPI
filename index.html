@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Removal Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="Images/logo.png" alt="Company Logo" class="logo">
+            </div>
+            <h1 class="page-title">Background Removal Tool</h1>
+        </div>
+    </header>
+    <main>
+        <section class="upload-section">
+            <h1>Remove Background from Your Images</h1>
+            <form id="upload-form">
+                <input type="file" name="file" accept="image/*" required onchange="previewImage(event)">
+                <button type="submit">Remove Background</button>
+            </form>
+        </section>
+        <section class="images-section">
+            <div id="input-image-container" class="image-container">
+                <h3>Input Image</h3>
+                <img id="input-image" src="" alt="">
+            </div>
+            <div id="output-image-container" class="image-container">
+                <h3>Output Image</h3>
+                <div id="output-placeholder">
+                    <p id="timer-text">...</p>
+                </div>
+                <img id="output-image" src="" alt="" style="display: none;">
+                <p id="processing-time" style="display: none;"></p>
+            </div>
+        </section>
+    </main>
+
+
+    <script>
+        const form = document.getElementById('upload-form');
+        const inputImageElement = document.getElementById('input-image');
+        const outputImageElement = document.getElementById('output-image');
+        const outputPlaceholder = document.getElementById('output-placeholder');
+        const timerText = document.getElementById('timer-text');
+        const processingTimeElement = document.getElementById('processing-time');
+        let timerInterval;
+        let startTime;
+
+        // Function to display the selected image before uploading
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                inputImageElement.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        // Function to start the timer
+        function startTimer() {
+            startTime = performance.now();
+            let seconds = 0;
+
+            timerInterval = setInterval(() => {
+                seconds += 100;
+                timerText.textContent = `Processing... ${seconds / 1000}s`;
+            }, 100);
+        }
+
+        // Function to stop the timer
+// Function to stop the timer
+function stopTimer() {
+    clearInterval(timerInterval);
+    const endTime = performance.now();
+    const totalTimeMilliseconds = (endTime - startTime).toFixed(2); // Total time in milliseconds
+    const totalTimeSeconds = (totalTimeMilliseconds / 1000).toFixed(2); // Convert to seconds
+    timerText.textContent = ''; // Clear the timer text
+    return totalTimeSeconds; // Return time in seconds
+}
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    outputImageElement.style.display = 'none'; // Hide the output image initially
+    outputPlaceholder.style.display = 'flex'; // Show the placeholder
+    processingTimeElement.style.display = 'none'; // Hide the processing time text
+    startTimer(); // Start the timer when the process starts
+
+    try {
+        const response = await fetch('/remove-background/', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const totalTime = stopTimer(); // Stop the timer and get the total time in seconds
+            outputPlaceholder.style.display = 'none'; // Hide the placeholder
+            outputImageElement.style.display = 'block'; // Show the output image
+            outputImageElement.src = data.image_url; // Set the output image URL
+
+            // Display the processing time in seconds
+            processingTimeElement.style.display = 'block';
+            processingTimeElement.textContent = `Processing completed in ${totalTime} seconds`;
+        } else {
+            const error = await response.json();
+            stopTimer();
+            timerText.textContent = `Error: ${error.detail}`;
+        }
+    } catch (error) {
+        stopTimer();
+        timerText.textContent = 'An error occurred while processing the image. Please try again.';
+        console.error(error);
+    }
+});
+
+    </script>
+</body>
+</html>

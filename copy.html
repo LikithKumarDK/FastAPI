@@ -1,0 +1,347 @@
+<div class="content-container">
+    <!-- Left Side (Text/Info) -->
+    <div class="text-section">
+        <img style="padding-bottom:10px" src="/wp-content/uploads/2025/01/Hibiki_logo.png" alt="HIBIKI Logo">
+        <p>
+            協調・調和・協力<br /><br />
+            お客様の隙間時間や余暇の充実に最適な空間。
+            <br />図書、TV、喫煙スペースを完備。<br />
+            お子様、皆様で遊べる将棋や各種ゲーム等をご用意しております。<br /><br />
+            宿泊者はもちろん、Visitorの方もご利用可能。
+            <br />サークル活動の集まり、友人の誕生日会などの貸切パーティーも受付しております。
+        </p>
+
+    </div>
+
+    <!-- Right Side (Image Slider) -->
+    <div class="image-slider">
+        <div class="slider-wrapper-first">
+            <div class="slider-wrapper-first-slider">
+                <img src="/wp-content/uploads/2025/01/facilities-hibikki1.png"
+                    class="active slider-wrapper-first-slider" alt="Sushi 1">
+                <img src="/wp-content/uploads/2025/01/facilities-hibikki2.png" class="slider-wrapper-first-slider"
+                    alt="Sushi 2">
+            </div>
+        </div>
+
+        <div class="facilities-hibika-container">
+            <span class="active hibika-dot" onclick="goTo_hibika_Slide(0)"></span>
+            <span class="hibika-dot" onclick="goTo_hibika_Slide(1)"></span>
+        </div>
+    </div>
+</div>
+
+<!-- Styles -->
+<style>
+    /* Flex Container */
+    .content-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin: auto;
+        height: 550px;
+    }
+
+
+    /* Left Section (Text) */
+    .text-section {
+        width: 40%;
+        text-align: left;
+        padding: 40px 15px;
+        background: linear-gradient(135deg, #f5f2e0, #e6e0c9, #c9b99e);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        word-break: break-word;
+    }
+
+    .text-section h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .text-section p {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    .facilities-hibika-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+    }
+
+    .hibika-dot {
+        width: 12px;
+        height: 12px;
+        margin: 5px;
+        background: #fff;
+        border-radius: 50%;
+        display: inline-block;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .hibika-dot.active {
+        background: #A83B5E;
+        border: 2px solid white;
+    }
+
+    .btn-primary {
+        background: #a83b5e;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .btn-primary:hover {
+        background: #8b2f4c;
+    }
+
+    /* Right Section (Slider) */
+    .image-slider {
+        position: relative;
+        width: 60%;
+        height: 100%;
+        overflow: hidden;
+        background: white;
+    }
+
+    .slider-wrapper-first {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        max-width: 100%;
+        padding: 0;
+        height: 100%;
+    }
+
+    .slider-wrapper-first-slider {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        /* Twice the width for smooth sliding */
+        transition: transform 1.5s ease-in-out;
+    }
+
+    .slider-wrapper-first-slider {
+        width: 100%;
+        height: 100%;
+        flex: 0 0 100%;
+        object-fit: cover;
+        max-width: 100%;
+    }
+
+    .slider-wrapper {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        padding-top: 0px !important;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .slider-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        position: absolute;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .slider-img.active {
+        opacity: 1;
+        position: relative;
+    }
+
+    .arrow-left {
+        right: 50%;
+    }
+
+    .arrow-right {
+        right: 30%;
+    }
+
+    .arrow-left:hover,
+    .arrow-right:hover {
+        background: #8b2f4c;
+    }
+
+    @media (min-width:770px) {
+
+        .arrow-left,
+        .arrow-right {
+            position: absolute;
+            bottom: 1%;
+            transform: translateY(-50%);
+            background: #a83b5e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            width: 50px;
+        }
+    }
+
+
+    @media (min-width:770px) and (max-width:1150px) {
+        .content-container {
+            min-height: 500px;
+            max-height: none;
+            /* Allow height to expand */
+            height: auto;
+            align-items: stretch;
+            /* Ensures both sections grow equally */
+        }
+
+        .text-section {
+            height: auto;
+        }
+
+        .image-slider {
+            height: auto;
+            display: flex;
+            align-items: stretch;
+            /* Ensures image stretches */
+        }
+
+        .image-slider .slider-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .arrow-left,
+        .arrow-right {
+            position: absolute;
+            bottom: 1%;
+            transform: translateY(-50%);
+            background: #a83b5e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            width: 50px;
+        }
+    }
+
+    /* Responsive for Mobile */
+    @media (max-width: 769px) {
+        .content-container {
+            flex-direction: column;
+            align-items: center;
+            height: auto;
+        }
+
+        .text-section,
+        .image-slider {
+            width: 100%;
+            text-align: center;
+        }
+
+        .image-slider {
+            height: auto;
+        }
+
+        .arrow-left,
+        .arrow-right {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #a83b5e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            width: 50px;
+        }
+
+        .arrow-left {
+            left: 1%;
+        }
+
+        .arrow-right {
+            right: 1%;
+        }
+
+    }
+</style>
+
+<script>
+    let currentIndex = 0;
+    const slidesContainer = document.querySelector(".slider-wrapper-first-slider");
+    const dots = document.querySelectorAll(".hibika-dot");
+    let autoSlideInterval;
+
+    function showSlide(index) {
+        currentIndex = index;
+        slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        dots.forEach(dot => dot.classList.remove("active"));
+        dots[currentIndex].classList.add("active");
+    }
+
+    function goToSlide(index) {
+        showSlide(index);
+        resetAutoSlide();
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % dots.length;
+        showSlide(currentIndex);
+        resetAutoSlide();
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + dots.length) % dots.length;
+        showSlide(currentIndex);
+        resetAutoSlide();
+    }
+
+    function resetAutoSlide() {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(nextSlide, 5000);
+    }
+
+    document.querySelector(".slider-wrapper-first").addEventListener("touchstart", (e) => {
+        touchStartX = e.touches[0].clientX;
+    });
+
+    document.querySelector(".slider-wrapper-first").addEventListener("touchend", (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        let swipeDistance = touchStartX - touchEndX;
+        if (swipeDistance > 50) {
+            nextSlide();
+        } else if (swipeDistance < -50) {
+            prevSlide();
+        }
+    }
+
+    resetAutoSlide();
+</script>

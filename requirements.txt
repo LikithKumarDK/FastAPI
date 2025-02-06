@@ -1,2 +1,12 @@
-fastapi
+wfastcgi
 uvicorn
+fastapi
+torch
+pillow  # PIL is part of Pillow
+torchvision
+einops
+kornia
+huggingface_hub
+opencv-python  # cv2 is included in opencv-python
+timm
+multiport
